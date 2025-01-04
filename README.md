@@ -1,16 +1,18 @@
-# 4-BIT-RIPPLE-COUNTER
+### NAME: SRI SRINIVASAN K
+### REG NO: 24900578
+### EXP NO 12: IMPLEMENTATION OF 4-BIT-RIPPLE-COUNTE
 
-**AIM:**
+### **AIM:**
 
 To implement  4 Bit Ripple Counter using verilog and validating their functionality using their functional tables
 
-**SOFTWARE REQUIRED:**
+### **SOFTWARE REQUIRED:**
 
 Quartus prime
 
-**THEORY**
+### **THEORY**
 
-**4 Bit Ripple Counter**
+### **4 Bit Ripple Counter**
 
 A binary ripple counter consists of a series connection of complementing flip-flops (T or JK type), with the output of each flip-flop connected to the Clock Pulse input of the next higher-order flip-flop. The flip-flop holding the least significant bit receives the incoming count pulses. The diagram of a 4-bit binary ripple counter is shown in Fig. below.
 
@@ -22,19 +24,83 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 ![image](https://github.com/naavaneetha/4-BIT-RIPPLE-COUNTER/assets/154305477/85e1958a-2fc1-49bb-9a9f-d58ccbf3663c)
 
-**Procedure**
+### **Procedure**
+Type the program in Quartus software.
 
-/* write all the steps invloved */
+Compile and run the program.
 
-**PROGRAM**
+Generate the RTL schematic and save the logic diagram.
 
-/* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
+Create nodes for inputs and outputs to generate the timing diagram.
 
- Developed by: RegisterNumber:
-*/
+For different input combinations generate the timing diagram.
 
-**RTL LOGIC FOR 4 Bit Ripple Counter**
+### **PROGRAM**
 
-**TIMING DIGRAMS FOR 4 Bit Ripple Counter**
+module EXP12(
+   input wire clk,  // Clock input
+   output reg [3:0] count // 4-bit counter output
+);
 
-**RESULTS**
+// Counter logic
+always @(posedge clk) begin
+   if (count == 4'b1111) // Reset when count reaches 15
+       count <= 4'b0000;
+   else
+       count <= count + 1; // Increment count
+end
+
+endmodule
+
+// Testbench
+module RippleCounter_tb;
+
+// Inputs
+reg clk;
+
+// Outputs
+wire [3:0] count;
+
+// Instantiate the counter
+RippleCounter uut(
+   .clk(clk),
+   .count(count)
+);
+
+// Clock generation
+initial begin
+   clk = 0;
+   forever #5 clk = ~clk; // Toggle clock every 5 time units
+end
+
+// Stimulus
+initial begin
+   // Wait for a few clock cycles
+   #10;
+   
+   // Display header
+   $display("Time | Count");
+   $display("-----------------");
+   
+   // Functional table testing
+   // Increment count 16 times and display the count
+   repeat (16) begin
+       #5; // Wait for one clock cycle
+       $display("%4d | %b", $time, count);
+   end
+   
+   // End simulation
+   $finish;
+end
+
+endmodule
+
+### **RTL LOGIC FOR 4 BIT RIPPLE COUNTER**
+![Screenshot 2025-01-04 092648](https://github.com/user-attachments/assets/750b5613-ceac-4fc0-bcf0-3665ccb08675)
+
+### **TIMING DIGRAMS FOR 4 Bit Ripple Counter**
+![Screenshot 2025-01-04 093242](https://github.com/user-attachments/assets/907485aa-3d65-4f7f-aeae-cc537ada912f)
+
+### **RESULTS**
+
+THE IMPLEMENTATION OF 4-BIT-RIPPLE-COUNTER IS TESTED AND VERIFIED.
